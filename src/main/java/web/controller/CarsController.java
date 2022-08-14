@@ -1,27 +1,27 @@
 package web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import web.Dao.CarDAO;
+import org.springframework.web.bind.annotation.RequestParam;
+import web.Service.CarService;
 
+import java.util.Optional;
 
 
 @Controller
 public class CarsController {
+    private final CarService carService;
 
-    private final CarDAO carDAO;
-
-    @Autowired
-    public CarsController(CarDAO carDAO) {
-        this.carDAO = carDAO;
+    public CarsController(CarService carService) {
+        this.carService = carService;
     }
 
 
     @GetMapping("/cars")
-    public String show(Model model) {
-        model.addAttribute("cars",carDAO.show());
+    public String showCars(@RequestParam ("count") Optional<Integer> count, Model model) {
+        model.addAttribute("cars", carService.showCars(count.orElse(0)));
         return "cars";
 
     }
