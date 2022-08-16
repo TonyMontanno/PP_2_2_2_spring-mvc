@@ -1,11 +1,11 @@
-package web.Service;
+package web.service;
 
-import web.Models.Car;
+import web.models.Car;
 
 import java.util.List;
 
 public interface CarService {
-public String showCars();
+
 public List<Car> showCars(int count);
 }
 
